@@ -1,0 +1,9 @@
+{application,new_gollum,
+             [{applications,[kernel,stdlib,elixir,logger,httpoison]},
+              {description,"new_gollum"},
+              {modules,['Elixir.Gollum','Elixir.Gollum.Application',
+                        'Elixir.Gollum.Cache','Elixir.Gollum.Fetcher',
+                        'Elixir.Gollum.Host','Elixir.Gollum.Parser']},
+              {registered,[]},
+              {vsn,"0.3.0"},
+              {mod,{'Elixir.Gollum.Application',[]}}]}.
