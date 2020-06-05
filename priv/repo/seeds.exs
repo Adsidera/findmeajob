@@ -9,10 +9,6 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-
-
 alias Findmeajob.JobCrawler
 
-JobCrawler.fetch_from_remote_jobs()
-JobCrawler.fetch_from_railsjobs()
-JobCrawler.fetch_from_stackoverflow()
+JobCrawler.parse_and_insert()
