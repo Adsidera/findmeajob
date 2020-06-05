@@ -1,5 +1,6 @@
 defmodule Findmeajob.Parsers.RemoteJobs do
   alias Findmeajob.Parsers.Shared.Extractor
+
   def parse(html) do
     html
     |> Floki.find("tr.job")
@@ -10,7 +11,7 @@ defmodule Findmeajob.Parsers.RemoteJobs do
     %{
       title: extract_text(job, "h2[itemprop=title]"),
       company: extract_text(job, "h3[itemprop=name]"),
-      added_on: extract_text(job, "td.time > a"),
+      added_on: extract_text(job, "td.time > a") |> Extractor.parse_date(),
       link: "https://remoteok.io#{extract_attribute(job, "a[itemprop=url]", "href")}"
     }
   end

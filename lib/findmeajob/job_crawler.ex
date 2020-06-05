@@ -4,12 +4,21 @@ defmodule Findmeajob.JobCrawler do
   alias Findmeajob.Parsers.Stackoverflow
   alias Findmeajob.Parsers.RemoteJobs
 
-  def call do
-    {:ok, response} = Crawly.fetch("https://stackoverflow.com/jobs?id=173998&q=ruby")
-    Stackoverflow.parse(response.body) |> create_job_posts()
+  @stackoverflow_url "https://stackoverflow.com/jobs?q=ruby&r=true"
+  @remote_jobs_url "https://remoteok.io/remote-ruby-jobs"
+  def parse_and_insert do
+    parse_from_stackoverflow()   |> create_job_posts()
+    parse_from_remote_jobs()     |> create_job_posts()
+  end
 
-    {:ok, response} = Crawly.fetch("https://remoteok.io/remote-ruby-jobs")
-    RemoteJobs.parse(response.body) |> create_job_posts()
+  def parse_from_stackoverflow do
+    response = Crawly.fetch(@stackoverflow_url)
+    Stackoverflow.parse(response.body)
+  end
+
+  def parse_from_remote_jobs do
+    response = Crawly.fetch(@remote_jobs_url)
+    RemoteJobs.parse(response.body)
   end
 
   def create_job_posts(fetched_data) do

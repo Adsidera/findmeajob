@@ -3,7 +3,7 @@ defmodule Findmeajob.Parsers.RemoteJobsTest do
   alias Findmeajob.Parsers.RemoteJobs
 
   test "parses response into" do
-    {:ok, response} = Crawly.fetch("https://remoteok.io/remote-ruby-jobs")
+    response = Crawly.fetch("https://remoteok.io/remote-ruby-jobs")
     scraped_list = RemoteJobs.parse(response.body)
     job = List.first(scraped_list)
     {:ok, link} = Map.fetch(job, :link)
