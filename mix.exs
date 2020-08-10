@@ -45,7 +45,9 @@ defmodule Findmeajob.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:crawly, "~> 0.1"},
       {:csv, "~> 2.3"},
-      {:scribe, "~> 0.10"}
+      {:scribe, "~> 0.10"},
+      {:timex, "~> 3.0"},
+      {:floki, "~> 0.26.0"}
     ]
   end
 
