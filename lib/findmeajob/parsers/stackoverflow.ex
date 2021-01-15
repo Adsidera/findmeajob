@@ -7,6 +7,7 @@ defmodule Findmeajob.Parsers.Stackoverflow do
     |> Floki.find(".listResults")
     |> Floki.find(".-job")
     |> Enum.map(&parse_job/1)
+    |> Enum.reject( fn job -> job[:added_on] == '1yr' end)
   end
 
   def parse_job(job) do

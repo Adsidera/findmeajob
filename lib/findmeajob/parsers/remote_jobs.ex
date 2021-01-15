@@ -5,6 +5,7 @@ defmodule Findmeajob.Parsers.RemoteJobs do
     html
     |> Floki.find("tr.job")
     |> Enum.map(&parse_job/1)
+    |> Enum.reject( fn job -> job[:added_on] == '1yr' end)
   end
 
   def parse_job(job) do

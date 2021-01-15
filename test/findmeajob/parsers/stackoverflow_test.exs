@@ -4,7 +4,6 @@ defmodule Findmeajob.Parsers.StackoverflowTest do
 
   test "parses response into maps with correct links" do
     response = Crawly.fetch("https://stackoverflow.com/jobs?q=ruby&r=true&sort=p")
-    require IEx; IEx.pry()
     scraped_list = Stackoverflow.parse(response.body)
     job = List.first(scraped_list)
     {:ok, link} = Map.fetch(job, :link)
@@ -13,5 +12,6 @@ defmodule Findmeajob.Parsers.StackoverflowTest do
     assert Enum.count(scraped_list) != 0
     assert link =~"https://www.stackoverflow.com"
     assert added_on != "ago"
+    refute Enum.find(scraped_list, fn job -> job[:added_on] == '1yr' end)
   end
 end
